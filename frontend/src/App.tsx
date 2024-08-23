@@ -19,8 +19,7 @@ const App: React.FC = () => {
 
   return (
     <ApolloProvider client={client}>
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <h1>Welcome to the Coin Counter Game</h1>
+      <div>
         <CoinCounter telegramId={telegramId} />
       </div>
     </ApolloProvider>

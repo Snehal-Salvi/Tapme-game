@@ -1,0 +1,141 @@
+.container {
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 2rem; 
+    font-weight: bold;
+    color: #eeff00;
+    text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+.coinIcon {
+    color: yellow;
+    vertical-align: middle;
+    border-radius: 50%; 
+}
+
+h2 {
+    font-size: 3rem; 
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px black;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: none;
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+.buttonClick {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.buttonClick::after {
+    content: '+1';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem; 
+    color: #ffffff;
+    font-weight: bold;
+    opacity: 0;
+    animation: none;
+}
+
+.buttonClick:active::after {
+    animation: riseAndFade 0.5s ease-out;
+}
+
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 25px #3aff13, 0 0 5px #3aff13;
+    }
+    50% {
+        text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 35px #3aff13, 0 0 10px #3aff13;
+    }
+    100% {
+        text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 25px #3aff13, 0 0 5px #3aff13;
+    }
+}
+
+@keyframes riseAndFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -150%) translateY(-30px);
+    }
+}
+
+.buttonClick:hover {
+    transform: scale(1.1);
+}
+
+/* Animation for the image */
+.buttonClick:active img {
+    animation: scaleAndBounce 0.5s ease-out;
+}
+
+@keyframes scaleAndBounce {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.2) translateY(-10px);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+
+@media (min-width: 600px) {
+    h1 {
+        font-size: 2.5rem; 
+    }
+    
+    h2 {
+        font-size: 4rem; 
+    }
+    
+    .buttonClick::after {
+        font-size: 4rem; 
+    }
+}
+
+@media (min-width: 900px) {
+    h1 {
+        font-size: 3rem; 
+    }
+    
+    h2 {
+        font-size: 5rem; 
+    }
+    
+    .buttonClick::after {
+        font-size: 5rem; 
+    }
+}

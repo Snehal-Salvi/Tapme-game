@@ -1,8 +1,11 @@
-// src/components/CoinCounter.tsx
-
 import React, { useState, useEffect, useRef } from "react";
+import styles from "./CoinCounter.module.css";
 import { useQuery, useMutation } from "@apollo/client";
 import gql from "graphql-tag";
+import { GiTwoCoins } from "react-icons/gi";
+import { BsCoin } from "react-icons/bs";
+import { SlEnergy } from "react-icons/sl";
+import coinImage from '../assets/3dCoin.png'
 
 const GET_USER = gql`
   query GetUser($telegramId: ID!) {
@@ -40,7 +43,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
 
   useEffect(() => {
     // Retrieve the available balance from localStorage
-    const storedBalance = localStorage.getItem('availableBalance');
+    const storedBalance = localStorage.getItem("availableBalance");
     if (storedBalance) {
       setAvailableBalance(parseInt(storedBalance, 10));
     } else {
@@ -54,7 +57,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
 
   useEffect(() => {
     // Store the available balance in localStorage whenever it changes
-    localStorage.setItem('availableBalance', availableBalance.toString());
+    localStorage.setItem("availableBalance", availableBalance.toString());
   }, [availableBalance]);
 
   const handleCoinUpdate = async (newCoins: number) => {
@@ -66,7 +69,9 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
     console.log("Attempting to update coins:", { telegramId, newCoins });
 
     try {
-      const { data } = await updateCoins({ variables: { telegramId, coins: newCoins } });
+      const { data } = await updateCoins({
+        variables: { telegramId, coins: newCoins },
+      });
       console.log("Coins updated successfully:", data);
       setCoins(newCoins);
       setAvailableBalance((prevBalance) => prevBalance - 1);
@@ -79,7 +84,6 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
       clickTimer.current = setTimeout(() => {
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
-
     } catch (error) {
       console.error("Error updating coins:", error);
     }
@@ -109,10 +113,14 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   }
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Coins: {coins}</h1>
-      <button onClick={() => handleCoinUpdate(coins + 1)}>Increase Coins</button>
-      <h2>Available Balance: {availableBalance}/500</h2>
+    <div className={styles.container}>
+      <h1><GiTwoCoins className={styles.coinIcon}/> TapMe <GiTwoCoins className={styles.coinIcon}/></h1>
+      <h2><BsCoin className={styles.coinIcon}/> {coins}</h2>
+      <button onClick={() => handleCoinUpdate(coins + 1)} className={styles.buttonClick}>
+      <img src={coinImage} alt="click-me"/>
+      </button>
+    
+      <h2><SlEnergy  className={styles.coinIcon}/> {availableBalance}/500</h2>
     </div>
   );
 };
