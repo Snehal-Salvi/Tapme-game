@@ -28,7 +28,7 @@ interface CoinCounterProps {
 
 const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   const [coins, setCoins] = useState<number>(0);
-  const [availableBalance, setAvailableBalance] = useState<number>(500);
+  const [availableBalance, setAvailableBalance] = useState<number>(0);
 
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { telegramId },
@@ -39,10 +39,23 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   const clickTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Retrieve the available balance from localStorage
+    const storedBalance = localStorage.getItem('availableBalance');
+    if (storedBalance) {
+      setAvailableBalance(parseInt(storedBalance, 10));
+    } else {
+      setAvailableBalance(500); // Default balance if not found
+    }
+
     if (data && data.getUser) {
       setCoins(data.getUser.coins);
     }
   }, [data]);
+
+  useEffect(() => {
+    // Store the available balance in localStorage whenever it changes
+    localStorage.setItem('availableBalance', availableBalance.toString());
+  }, [availableBalance]);
 
   const handleCoinUpdate = async (newCoins: number) => {
     if (availableBalance <= 0) {
