@@ -1,82 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation, gql } from '@apollo/client';
+
+const GET_USER_COINS = gql`
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      coins
+    }
+  }
+`;
+
+const UPDATE_USER_COINS = gql`
+  mutation UpdateCoins($id: ID!, $coins: Int!) {
+    updateCoins(id: $id, coins: $coins) {
+      id
+      coins
+    }
+  }
+`;
 
 const CoinCounter: React.FC = () => {
-  const [coins, setCoins] = useState<number>(0);
+  const userId = 'your_user_id'; // Replace with actual user ID from your auth system
+  const { data } = useQuery(GET_USER_COINS, {
+    variables: { id: userId },
+  });
+  const [updateCoins] = useMutation(UPDATE_USER_COINS);
+
+  const [coins, setCoins] = useState<number>(data?.getUser.coins || 0);
   const [balance, setBalance] = useState<number>(500);
-  const [isResetting, setIsResetting] = useState<boolean>(false);
-  const [resetTimer, setResetTimer] = useState<NodeJS.Timeout | null>(null);
-  const [decrementInterval, setDecrementInterval] =
-    useState<NodeJS.Timeout | null>(null);
 
-  const handleMouseDown = () => {
-    if (balance > 0 && !decrementInterval) {
-      const intervalId = setInterval(() => {
-        setCoins((prevCoins) => prevCoins + 1);
-        setBalance((prevBalance) => prevBalance - 1);
-      }, 50); // Adjust the interval speed as needed
-      setDecrementInterval(intervalId);
+  useEffect(() => {
+    if (data) {
+      setCoins(data.getUser.coins);
     }
+  }, [data]);
 
-    // Clear any existing reset timer
-    if (resetTimer) {
-      clearTimeout(resetTimer);
-      setResetTimer(null);
-    }
-  };
-
-  const handleMouseUp = () => {
-    if (decrementInterval) {
-      clearInterval(decrementInterval);
-      setDecrementInterval(null);
-    }
-
-    // Start reset timer
-    const timerId = setTimeout(() => {
-      setIsResetting(true);
-    }, 1000); // 1 second delay before starting to reset balance
-
-    setResetTimer(timerId);
+  const handleIncreaseCoins = () => {
+    setCoins((prev) => {
+      const newCoins = prev + 1;
+      setBalance((prevBalance) => prevBalance - 1);
+      updateCoins({ variables: { id: userId, coins: newCoins } });
+      return newCoins;
+    });
   };
 
   useEffect(() => {
-    let incrementInterval: NodeJS.Timeout;
-
-    if (isResetting) {
-      incrementInterval = setInterval(() => {
-        setBalance((prevBalance) => {
-          if (prevBalance < 500) {
-            return prevBalance + 1;
-          } else {
-            clearInterval(incrementInterval);
-            setIsResetting(false);
-            return 500;
-          }
-        });
-      }, 1000); // Adjust the interval speed to make the effect visible (e.g., every 50ms)
+    let interval: NodeJS.Timeout;
+    if (balance < 500) {
+      interval = setInterval(() => {
+        setBalance((prevBalance) => (prevBalance < 500 ? prevBalance + 1 : 500));
+      }, 50);
     }
-
-    return () => {
-      if (incrementInterval) clearInterval(incrementInterval);
-    };
-  }, [isResetting]);
-
-  useEffect(() => {
-    return () => {
-      if (resetTimer) clearTimeout(resetTimer);
-      if (decrementInterval) clearInterval(decrementInterval);
-    };
-  }, [resetTimer, decrementInterval]);
+    return () => clearInterval(interval);
+  }, [balance]);
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Coins: {coins}</h1>
-      <button
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp} // Handle case when mouse leaves the button
-      >
-        Increase Coins
-      </button>
+      <button onMouseDown={handleIncreaseCoins}>Increase Coins</button>
       <h2>Available Balance: {balance}/500</h2>
     </div>
   );
