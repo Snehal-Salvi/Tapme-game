@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { GiTwoCoins } from "react-icons/gi";
 import { BsCoin } from "react-icons/bs";
 import { SlEnergy } from "react-icons/sl";
-import coinImage from '../assets/3dCoin.png';
+import coinImage from "../assets/3dCoin.png";
 
 const GET_USER = gql`
   query GetUser($telegramId: ID!) {
@@ -81,7 +81,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
     } catch (error) {
-      console.error('Error updating coins:', error);
+      console.error("Error updating coins:", error);
     }
   };
 
@@ -110,12 +110,22 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
 
   return (
     <div className={styles.container}>
-      <h1><GiTwoCoins className={styles.coinIcon}/> TapMe <GiTwoCoins className={styles.coinIcon}/></h1>
-      <h2><BsCoin className={styles.coinIcon}/> {coins}</h2>
-      <button onClick={() => handleCoinUpdate(coins + 1)} className={styles.buttonClick}>
-        <img src={coinImage} alt="click-me"/>
+      <h1>
+        <GiTwoCoins className={styles.coinIcon} /> TapMe{" "}
+        <GiTwoCoins className={styles.coinIcon} />
+      </h1>
+      <h2>
+        <BsCoin className={styles.coinIcon} /> {coins}
+      </h2>
+      <button
+        onClick={() => handleCoinUpdate(coins + 1)}
+        className={styles.buttonClick}
+      >
+        <img src={coinImage} alt="click-me" />
       </button>
-      <h2><SlEnergy  className={styles.coinIcon}/> {availableBalance}/500</h2>
+      <h2>
+        <SlEnergy className={styles.coinIcon} /> {availableBalance}/500
+      </h2>
     </div>
   );
 };
