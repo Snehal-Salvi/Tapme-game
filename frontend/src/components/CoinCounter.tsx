@@ -62,17 +62,13 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
 
   const handleCoinUpdate = async (newCoins: number) => {
     if (availableBalance <= 0) {
-      console.log("No available balance left to use.");
       return;
     }
-
-    console.log("Attempting to update coins:", { telegramId, newCoins });
 
     try {
       const { data } = await updateCoins({
         variables: { telegramId, coins: newCoins },
       });
-      console.log("Coins updated successfully:", data);
       setCoins(newCoins);
       setAvailableBalance((prevBalance) => prevBalance - 1);
 
@@ -85,7 +81,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
     } catch (error) {
-      console.error("Error updating coins:", error);
+      // Handle error
     }
   };
 
@@ -117,9 +113,8 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
       <h1><GiTwoCoins className={styles.coinIcon}/> TapMe <GiTwoCoins className={styles.coinIcon}/></h1>
       <h2><BsCoin className={styles.coinIcon}/> {coins}</h2>
       <button onClick={() => handleCoinUpdate(coins + 1)} className={styles.buttonClick}>
-      <img src={coinImage} alt="click-me"/>
+        <img src={coinImage} alt="click-me"/>
       </button>
-    
       <h2><SlEnergy  className={styles.coinIcon}/> {availableBalance}/500</h2>
     </div>
   );
