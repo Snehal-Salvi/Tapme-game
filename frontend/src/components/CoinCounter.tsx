@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 const CoinCounter: React.FC = () => {
   const [coins, setCoins] = useState<number>(0);
