@@ -64,26 +64,27 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
     if (availableBalance <= 0) {
       return;
     }
-
+  
     try {
-      const { data } = await updateCoins({
+      await updateCoins({
         variables: { telegramId, coins: newCoins },
       });
       setCoins(newCoins);
       setAvailableBalance((prevBalance) => prevBalance - 1);
-
+  
       // Reset click timer
       if (clickTimer.current) {
         clearTimeout(clickTimer.current);
       }
-
+  
       clickTimer.current = setTimeout(() => {
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
     } catch (error) {
-      console.error("Error updating coins:", error);
+      console.error('Error updating coins:', error);
     }
   };
+  
 
   const replenishBalance = () => {
     if (availableBalance >= 500) return;
