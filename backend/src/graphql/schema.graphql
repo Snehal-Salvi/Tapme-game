@@ -1,0 +1,15 @@
+# schema.graphql
+
+type User {
+  id: ID!
+  username: String
+  coins: Int!
+}
+
+type Query {
+  getUser(id: ID!): User
+}
+
+type Mutation {
+  updateCoins(id: ID!, coins: Int!): User
+}
