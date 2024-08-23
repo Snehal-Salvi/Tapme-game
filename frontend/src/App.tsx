@@ -1,5 +1,3 @@
-// src/App.tsx
-
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import CoinCounter from "./components/CoinCounter";
@@ -11,11 +9,19 @@ const App: React.FC = () => {
     cache: new InMemoryCache(),
   });
 
+  // Extract the Telegram ID from the URL
+  const query = new URLSearchParams(window.location.search);
+  const telegramId = query.get("telegramId");
+
+  if (!telegramId) {
+    return <div>Error: No Telegram ID provided</div>;
+  }
+
   return (
     <ApolloProvider client={client}>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1>Welcome to the Coin Counter Game</h1>
-        <CoinCounter />
+        <CoinCounter telegramId={telegramId} />
       </div>
     </ApolloProvider>
   );

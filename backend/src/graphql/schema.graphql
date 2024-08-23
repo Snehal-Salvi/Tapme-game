@@ -1,3 +1,4 @@
+# schema.graphql
 type User {
   id: ID!
   username: String
@@ -5,9 +6,9 @@ type User {
 }
 
 type Query {
-  getUser(id: ID!): User
+  getUser(telegramId: ID!): User
 }
 
 type Mutation {
-  updateCoins(id: ID!, coins: Int!): User
+  updateCoins(telegramId: ID!, coins: Int!): User
 }

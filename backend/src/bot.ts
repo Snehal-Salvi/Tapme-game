@@ -11,7 +11,6 @@ const supabaseUrl = process.env.SUPABASE_URL!;
 const supabaseApiKey = process.env.SUPABASE_API_KEY!;
 
 const supabase = createClient(supabaseUrl, supabaseApiKey);
-
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, async (msg) => {
@@ -37,7 +36,6 @@ bot.onText(/\/start/, async (msg) => {
           username: username || null,
           first_name: firstName || null,
           last_name: lastName || null,
-          coins: 0, // Initialize coins field
         },
       ]);
 
@@ -56,7 +54,7 @@ bot.onText(/\/start/, async (msg) => {
         [
           {
             text: 'Start Game',
-            url: appUrl,
+            url: `${appUrl}?telegramId=${telegramId}`, // Pass Telegram ID as query parameter
           },
         ],
       ],
