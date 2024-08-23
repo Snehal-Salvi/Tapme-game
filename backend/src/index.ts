@@ -1,5 +1,3 @@
-// src/index.ts
-
 import { ApolloServer } from 'apollo-server';
 import { readFileSync } from 'fs';
 import { resolvers } from './graphql/resolvers';

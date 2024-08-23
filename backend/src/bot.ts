@@ -1,5 +1,4 @@
 // src/bot.ts
-
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
@@ -38,6 +37,7 @@ bot.onText(/\/start/, async (msg) => {
           username: username || null,
           first_name: firstName || null,
           last_name: lastName || null,
+          coins: 0, // Initialize coins field
         },
       ]);
 
