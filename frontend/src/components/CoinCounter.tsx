@@ -29,7 +29,6 @@ interface CoinCounterProps {
 const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   const [coins, setCoins] = useState<number>(0);
   const [availableBalance, setAvailableBalance] = useState<number>(500);
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { telegramId },
@@ -58,7 +57,6 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
       console.log("Coins updated successfully:", data);
       setCoins(newCoins);
       setAvailableBalance((prevBalance) => prevBalance - 1);
-      setIsUpdating(true);
 
       // Reset click timer
       if (clickTimer.current) {
@@ -66,7 +64,6 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
       }
 
       clickTimer.current = setTimeout(() => {
-        setIsUpdating(false);
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
 
