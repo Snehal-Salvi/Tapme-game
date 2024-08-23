@@ -84,7 +84,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
         }
         return prevBalance + 1;
       });
-    }, 100); // Adjust interval and increment as needed
+    }, 1000); // Adjust interval and increment as needed
   };
 
   if (loading) {

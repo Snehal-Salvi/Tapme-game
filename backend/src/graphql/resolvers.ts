@@ -1,18 +1,24 @@
 // src/graphql/resolvers.ts
+
 export const resolvers = (supabase: any) => ({
     Query: {
       getUser: async (_: any, { telegramId }: { telegramId: string }) => {
-        const { data, error } = await supabase
-          .from('users')
-          .select('*')
-          .eq('telegram_id', telegramId)
-          .single();
+        try {
+          const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('telegram_id', telegramId)
+            .single();
   
-        if (error) {
-          throw new Error(error.message);
+          if (error) {
+            throw new Error(`Error fetching user: ${error.message}`);
+          }
+  
+          return data;
+        } catch (error) {
+          console.error('Error in getUser resolver:', error);
+          throw error;
         }
-  
-        return data;
       },
     },
     Mutation: {
@@ -20,17 +26,22 @@ export const resolvers = (supabase: any) => ({
         _: any,
         { telegramId, coins }: { telegramId: string; coins: number }
       ) => {
-        const { data, error } = await supabase
-          .from('users')
-          .update({ coins })
-          .eq('telegram_id', telegramId)
-          .single();
+        try {
+          const { data, error } = await supabase
+            .from('users')
+            .update({ coins })
+            .eq('telegram_id', telegramId)
+            .single();
   
-        if (error) {
-          throw new Error(error.message);
+          if (error) {
+            throw new Error(`Error updating coins: ${error.message}`);
+          }
+  
+          return data;
+        } catch (error) {
+          console.error('Error in updateCoins resolver:', error);
+          throw error;
         }
-  
-        return data;
       },
     },
   });
