@@ -13,8 +13,9 @@ const App: React.FC = () => {
   const query = new URLSearchParams(window.location.search);
   const telegramId = query.get("telegramId");
 
+  // Error handling if no Telegram ID is found
   if (!telegramId) {
-    return <div>Error: No Telegram ID provided</div>;
+    return <div>Error: No Telegram ID provided. Please access the app through the Telegram bot.</div>;
   }
 
   return (

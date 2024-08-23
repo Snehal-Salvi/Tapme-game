@@ -1,4 +1,3 @@
-# schema.graphql
 type User {
   id: ID!
   username: String

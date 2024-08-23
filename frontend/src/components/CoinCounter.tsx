@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { GiTwoCoins } from "react-icons/gi";
 import { BsCoin } from "react-icons/bs";
 import { SlEnergy } from "react-icons/sl";
-import coinImage from '../assets/3dCoin.png'
+import coinImage from '../assets/3dCoin.png';
 
 const GET_USER = gql`
   query GetUser($telegramId: ID!) {
@@ -81,7 +81,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
         replenishBalance();
       }, 1000); // Delay to replenish after clicking stops
     } catch (error) {
-      // Handle error
+      console.error('Error updating coins:', error);
     }
   };
 
