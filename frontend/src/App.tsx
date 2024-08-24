@@ -1,15 +1,9 @@
 import React from "react";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apolloClient"; 
 import CoinCounter from "./components/CoinCounter";
 
 const App: React.FC = () => {
-
-  const client = new ApolloClient({
-    uri: process.env.REACT_APP_GRAPHQL_URI, 
-    cache: new InMemoryCache(),
-  });
-
-
   const query = new URLSearchParams(window.location.search);
   const telegramId = query.get("telegramId");
 
