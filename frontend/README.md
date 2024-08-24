@@ -1,46 +1,75 @@
-# Getting Started with Create React App
+# 🧩 TapMe Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the frontend code for the TapMe project. It features a React application that interacts with a Telegram bot and a Supabase database. Users can start a game, view their coin balance, and interact with the game to update their coin balance.
 
-## Available Scripts
 
-In the project directory, you can run:
+## 🛠️ Technologies Used
 
-### `npm start`
+- **React:** JavaScript library for building user interfaces.
+- **Apollo Client:** Library for managing GraphQL data and state.
+- **GraphQL:** Query language for APIs.
+- **CSS Modules:** For modular and scoped CSS styling.
+- **React Icons:** To add icons to the UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛠️ Installation 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To run this project locally, follow these steps:
 
-### `npm test`
+1. Clone the repository.
+2. Navigate to the project directory:
+```
+cd frontend
+```
+3. Install the necessary dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `npm run build`
+4. Run the project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📖 Approach
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend Architecture
 
-### `npm run eject`
+- **Component Structure:** 
+  - The application consists of functional React components that utilize hooks for managing state and side effects.
+- **State Management:** 
+  - Employs React's `useState` and `useEffect` hooks to handle local component state and manage side effects.
+- **GraphQL Integration:** 
+  - Utilizes Apollo Client to interact with the GraphQL API for data fetching and management.
+- **Routing:** 
+  - Retrieves query parameters from the URL to pass data to components, specifically extracting the `telegramId` to interact with the `CoinCounter` component.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Key Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **`App` Component:**
+  - Serves as the main entry point of the application.
+  - Retrieves the `telegramId` from the URL and passes it as a prop to the `CoinCounter` component.
+- **`CoinCounter` Component:**
+  - Displays and manages the user's coin balance.
+  - Allows users to interact with the game and update their coin balance by clicking a button.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 📜 File Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **`src/`**: Contains all source files for the project.
+  - **`components/`**: Contains React components used in the application.
+  - **`assets/`**: Houses static assets such as images.
+  - **`apolloClient.ts`**: Configuration for Apollo Client.
+  - **`App.tsx`**: The main application component.
+  - **`index.tsx`**: The entry point for the React application.
+  - **`styles/`**: Contains CSS modules for styling components.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 👩‍💻 Authors
+
+- [@Snehal](https://github.com/Snehal-Salvi)
+
+
+
+
