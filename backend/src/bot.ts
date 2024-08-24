@@ -1,5 +1,3 @@
-// src/bot.ts
-
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
@@ -19,21 +17,19 @@ bot.onText(/\/start/, async (msg) => {
   const { id: telegramId, username, first_name: firstName, last_name: lastName } = msg.from!;
 
   try {
-    // Fetch existing users with exact match
+
     const { data: existingUsers, error: fetchError } = await supabase
       .from('users')
       .select('*')
-      .eq('telegram_id', telegramId.toString()); // Ensure telegramId is a string
+      .eq('telegram_id', telegramId.toString()); 
 
     if (fetchError) {
       console.error('Error fetching user:', fetchError.message);
       return;
     }
 
-
-
     if (existingUsers.length === 0) {
-      // Insert new user if not found
+
       const { data, error } = await supabase
         .from('users')
         .insert([
@@ -43,25 +39,26 @@ bot.onText(/\/start/, async (msg) => {
             first_name: firstName || null,
             last_name: lastName || null,
           },
-        ]);
+        ])
+        .select(); 
 
       if (error) {
         console.error('Error inserting user:', error.message);
       } else {
-        console.log('User registered successfully');
+        console.log('User registered successfully', data);
       }
     } else {
       console.log('User already registered:', existingUsers[0]);
     }
 
-    // Send a welcome message with a button
+ 
     const opts = {
       reply_markup: {
         inline_keyboard: [
           [
             {
               text: 'Start Game',
-              url: `${appUrl}?telegramId=${telegramId}`, // Pass Telegram ID as query parameter
+              url: `${appUrl}?telegramId=${telegramId}`, 
             },
           ],
         ],

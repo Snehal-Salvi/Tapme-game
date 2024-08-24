@@ -8,7 +8,7 @@
 }
 
 h1 {
-    font-size: 2rem; 
+    font-size: 2rem;
     font-weight: bold;
     color: #eeff00;
     text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6);
@@ -22,11 +22,11 @@ h1 {
 .coinIcon {
     color: yellow;
     vertical-align: middle;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
 h2 {
-    font-size: 3rem; 
+    font-size: 3rem;
     font-weight: bold;
     color: #fff;
     text-shadow: 1px 1px 2px black;
@@ -39,7 +39,7 @@ img {
     max-width: 100%;
     height: auto;
     border: none;
-    transition: transform 0.3s ease; /* Smooth transition for scaling */
+    transition: transform 0.3s ease;
 }
 
 .buttonClick {
@@ -56,7 +56,7 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3rem; 
+    font-size: 3rem;
     color: #ffffff;
     font-weight: bold;
     opacity: 0;
@@ -72,9 +72,11 @@ img {
     0% {
         text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 25px #3aff13, 0 0 5px #3aff13;
     }
+
     50% {
         text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 35px #3aff13, 0 0 10px #3aff13;
     }
+
     100% {
         text-shadow: 1px 1px 2px rgba(8, 5, 70, 0.6), 0 0 25px #3aff13, 0 0 5px #3aff13;
     }
@@ -85,6 +87,7 @@ img {
         opacity: 1;
         transform: translate(-50%, -50%) translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translate(-50%, -150%) translateY(-30px);
@@ -95,7 +98,7 @@ img {
     transform: scale(1.1);
 }
 
-/* Animation for the image */
+
 .buttonClick:active img {
     animation: scaleAndBounce 0.5s ease-out;
 }
@@ -104,9 +107,11 @@ img {
     0% {
         transform: scale(1) translateY(0);
     }
+
     50% {
         transform: scale(1.2) translateY(-10px);
     }
+
     100% {
         transform: scale(1) translateY(0);
     }
@@ -114,28 +119,28 @@ img {
 
 @media (min-width: 600px) {
     h1 {
-        font-size: 2.5rem; 
+        font-size: 2.5rem;
     }
-    
+
     h2 {
-        font-size: 4rem; 
+        font-size: 4rem;
     }
-    
+
     .buttonClick::after {
-        font-size: 4rem; 
+        font-size: 4rem;
     }
 }
 
 @media (min-width: 900px) {
     h1 {
-        font-size: 3rem; 
+        font-size: 3rem;
     }
-    
+
     h2 {
-        font-size: 5rem; 
+        font-size: 5rem;
     }
-    
+
     .buttonClick::after {
-        font-size: 5rem; 
+        font-size: 5rem;
     }
 }

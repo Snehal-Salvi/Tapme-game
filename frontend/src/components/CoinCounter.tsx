@@ -42,12 +42,11 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   const clickTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Retrieve the available balance from localStorage
     const storedBalance = localStorage.getItem("availableBalance");
     if (storedBalance) {
       setAvailableBalance(parseInt(storedBalance, 10));
     } else {
-      setAvailableBalance(500); // Default balance if not found
+      setAvailableBalance(500);
     }
 
     if (data && data.getUser) {
@@ -56,40 +55,40 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   }, [data]);
 
   useEffect(() => {
-    // Store the available balance in localStorage whenever it changes
     localStorage.setItem("availableBalance", availableBalance.toString());
   }, [availableBalance]);
 
   const handleCoinUpdate = async (newCoins: number) => {
     if (availableBalance <= 0) {
+      console.log("No available balance left to use.");
       return;
     }
-  
+
+    console.log("Attempting to update coins:", { telegramId, newCoins });
+
     try {
-      await updateCoins({
+      const { data } = await updateCoins({
         variables: { telegramId, coins: newCoins },
       });
+      console.log("Coins updated successfully:", data);
       setCoins(newCoins);
       setAvailableBalance((prevBalance) => prevBalance - 1);
-  
-      // Reset click timer
+
       if (clickTimer.current) {
         clearTimeout(clickTimer.current);
       }
-  
+
       clickTimer.current = setTimeout(() => {
         replenishBalance();
-      }, 1000); // Delay to replenish after clicking stops
+      }, 1000);
     } catch (error) {
-      console.error('Error updating coins:', error);
+      console.error("Error updating coins:", error);
     }
   };
-  
 
   const replenishBalance = () => {
     if (availableBalance >= 500) return;
 
-    // Increase available balance gradually
     const replenishInterval = setInterval(() => {
       setAvailableBalance((prevBalance) => {
         if (prevBalance >= 500) {
@@ -98,7 +97,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
         }
         return prevBalance + 1;
       });
-    }, 1000); // Adjust interval and increment as needed
+    }, 1000);
   };
 
   if (loading) {
@@ -112,7 +111,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
   return (
     <div className={styles.container}>
       <h1>
-        <GiTwoCoins className={styles.coinIcon} /> TapMe{" "}
+        <GiTwoCoins className={styles.coinIcon} /> TapMe !!{" "}
         <GiTwoCoins className={styles.coinIcon} />
       </h1>
       <h2>
@@ -124,6 +123,7 @@ const CoinCounter: React.FC<CoinCounterProps> = ({ telegramId }) => {
       >
         <img src={coinImage} alt="click-me" />
       </button>
+
       <h2>
         <SlEnergy className={styles.coinIcon} /> {availableBalance}/500
       </h2>
