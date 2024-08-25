@@ -7,6 +7,9 @@ A Telegram bot that integrates with a React app and a Supabase database to track
 
 https://github.com/user-attachments/assets/025fc91c-9fcb-4190-8725-f64c9564d0ab
 
+## 📸 Snapshot
+
+![Interface](./frontend/src/assets/app-interface.png)
 
 ## 🕹️ Usage
 
