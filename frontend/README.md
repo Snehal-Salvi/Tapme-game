@@ -2,6 +2,9 @@
 
 This repository contains the frontend code for the TapMe project. It features a React application that interacts with a Telegram bot and a Supabase database. Users can start a game, view their coin balance, and interact with the game to update their coin balance.
 
+## 📸 App Interface
+
+![Interface](./src/assets/app-interface.png)
 
 ## 🛠️ Technologies Used
 

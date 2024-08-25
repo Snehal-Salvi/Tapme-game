@@ -2,13 +2,7 @@
 
 A Telegram bot that integrates with a React app and a Supabase database to track user interactions and manage a coin balance. The bot sends users a welcome message with a button to start a game, and their coin balance can be updated via the React app.
 
-## 📚 Backend Documentation
-
-For more information on backend setup and usage, please refer to the [Backend README](/backend/README.md).
-
-## 🖥️ Frontend Documentation
-
-For more information on frontend setup and usage, please refer to the [Frontend README](/frontend/README.md).
+## 📸 App Demo
 
 ## 🕹️ Usage
 
@@ -23,6 +17,15 @@ For more information on frontend setup and usage, please refer to the [Frontend 
 3. **Click on the Coin Image:**
    - Follow the link provided by the bot to open the game in your browser.
    - Enjoy the game by interacting with the coin image to update your coin balance.
+
+## 📚 Backend Documentation
+
+For more information on backend setup and usage, please refer to the [Backend README](/backend/README.md).
+
+## 🖥️ Frontend Documentation
+
+For more information on frontend setup and usage, please refer to the [Frontend README](/frontend/README.md).
+
 
 ## 🔧 Backend Approach
 
