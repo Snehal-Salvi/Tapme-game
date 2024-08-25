@@ -4,6 +4,10 @@ A Telegram bot that integrates with a React app and a Supabase database to track
 
 ## 📸 App Demo
 
+
+https://github.com/user-attachments/assets/025fc91c-9fcb-4190-8725-f64c9564d0ab
+
+
 ## 🕹️ Usage
 
 1. **Open the Telegram Bot:**
