@@ -1,13 +1,24 @@
+# Define a User type in the GraphQL schema
+# This represents the structure of a user object in the API.
+
 type User {
-  id: ID!
-  username: String
-  coins: Int!
+  id: ID! # The user's unique identifier
+  username: String # The user's Telegram username (optional)
+  coins: Int! # The user's coin balance, which is mandatory
 }
 
+# Define the root Query type in the GraphQL schema
+# This type includes all the read operations for the API.
+
 type Query {
+  # Define the getUser query, which retrieves a user by their Telegram ID
   getUser(telegramId: ID!): User
 }
 
+# Define the root Mutation type in the GraphQL schema
+# This type includes all the write operations for the API.
+
 type Mutation {
+  # Define the updateCoins mutation, which updates a user's coin balance
   updateCoins(telegramId: ID!, coins: Int!): User
 }
